@@ -14,6 +14,7 @@ public class IPUtil {
 
     /**
      * 获取公网ip
+     *
      * @return
      */
     public static String getPublicIp() throws IOException {
@@ -22,11 +23,10 @@ public class IPUtil {
         Request ipRequest = new Request.Builder()
                 .url(url)
                 .build();
-        Response ipResponse= okHttpClient.newCall(ipRequest).execute();
-        if(ipResponse.isSuccessful()){
+        Response ipResponse = okHttpClient.newCall(ipRequest).execute();
+        if (ipResponse.isSuccessful()) {
             if (ipResponse.body() != null) {
-                ipResponse.close();
-                return ipResponse.body().string();
+                return ipResponse.body().string().trim();
             }
         }
         ipResponse.close();
